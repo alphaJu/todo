@@ -1,27 +1,43 @@
 <html>
   <head>
     <title>Todo</title>
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-</script>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </script>
   </head>
   <body>
-    <div>
+    <br>
+    <div class="container">
       <h2>Todo List</h2>
-      <input type="text" id="title" name="title" placeholder="title">
-      <input type="test" id="content" name="content" placeholder="content">
-      <select id="priority" name="priority">
-        <option value=""></option>
-        <option value="!">!</option>
-        <option value="!!">!!</option>
-        <option value="!!!">!!!</option>
-      </select>
-      <input type="date" id="dueDate" name="dueDate">
-      <button onclick="postTodo();">ADD</button>
-      <button onclick="expired();">EXPIRED</button>
+      <div class="form-row">
+        <div class="col">
+          <input type="text" id="title" name="title" class="form-control" placeholder="title">
+        </div>
+        <div class="col">
+          <input type="test" id="content" name="content" class="form-control" placeholder="content">
+        </div>
+        <div class="col">
+          <select id="priority" name="priority" class="browser-default custom-select">
+            <option value=""></option>
+            <option value="!">!</option>
+            <option value="!!">!!</option>
+            <option value="!!!">!!!</option>
+          </select>
+        </div>
+        <div class="col">
+          <input type="date" id="dueDate" name="dueDate" class="form-control">
+        </div>
+        <div class="col">
+          <button class="btn btn-success btn-sm" onclick="postTodo();">ADD</button>
+          <button class="btn btn-warning btn-sm" onclick="expired();">EXPIRED</button>
+        </div>
+      </div>
     </div>
-    <div>
-      <table>
+    <br>
+    <div class="container">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Title</th>
@@ -36,16 +52,16 @@
           <% for(var i = 0; i < result.length; i++) {var todo = result[i];%>
             <tr>
               <td>
-                <input type="text" id="<%=todo._id%>title" name="title" value=<%=todo.title%>>
+                <input type="text" id="<%=todo._id%>title" name="title" class="form-control" value=<%=todo.title%>>
                 </td>
               <td>
-                <input type="text" id="<%=todo._id%>content" name="content" value=<%=todo.content%>>
+                <input type="text" id="<%=todo._id%>content" name="content" class="form-control" value=<%=todo.content%>>
               </td>
               <td>
-                <input type="date" id="<%=todo._id%>dueDate" name="dueDate" value=<%=todo.date%>>
+                <input type="date" id="<%=todo._id%>dueDate" name="dueDate" class="form-control" value=<%=todo.date%>>
               </td>
               <td>
-                <select id="<%=todo._id%>priority" name="priority">
+                <select id="<%=todo._id%>priority" name="priority" class="browser-default custom-select">
                   <option value="" <% if(todo.priority==="") { %>selected<%}%> ></option>
                   <option value="!" <% if(todo.priority==="!") { %>selected<%}%> >!</option>
                   <option value="!!" <% if(todo.priority==="!!") { %>selected<%}%> >!!</option>
@@ -56,8 +72,8 @@
                 <input type="checkbox" id="<%=todo._id%>done" name="done" <% if(todo.done!=="0") {%>checked<%}%>>Done
               </td>
               <td>
-                <button onclick="modifyTodo('<%=todo._id%>');">MOD</button>
-                <button onclick="deleteTodo('<%=todo._id%>');">DEL</button>
+                <button class="btn btn-primary btn-sm" onclick="modifyTodo('<%=todo._id%>');">MOD</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteTodo('<%=todo._id%>');">DEL</button>
               </td>
             </tr>
           <% } %>
@@ -68,11 +84,11 @@
   <script>
   function expired() {
     let alerts = <%- JSON.stringify(expired) %>
-    let message = "These are expired.\n\n";
+    let message = "";
     alerts.forEach((alert) => {
       message += alert.title + " : " + alert.content + " was expired at " + alert.date + "\n";
     })
-    alert(message);
+    swal({title:"These are expired", text:message});
   }
 
   function modifyTodo(_id) {
