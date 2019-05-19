@@ -1,7 +1,7 @@
 <html>
   <head>
-    <title>Main</title>
-<!--    <link rel="stylesheet" type="text/css" href="css/style.css">-->
+    <title>Todo</title>
+    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </script>
   </head>
@@ -18,9 +18,7 @@
       </select>
       <input type="date" id="dueDate" name="dueDate">
       <button onclick="postTodo();">ADD</button>
-    </div>
-    <div>
-      <button onclick="expired('<%=expired[0].title%>');">ALERT</button>
+      <button onclick="expired();">EXPIRED</button>
     </div>
     <div>
       <table>
@@ -68,8 +66,13 @@
     </div>
   </body>
   <script>
-  function expired(expired) {
-    console.log(expired);
+  function expired() {
+    let alerts = <%- JSON.stringify(expired) %>
+    let message = "These are expired.\n\n";
+    alerts.forEach((alert) => {
+      message += alert.title + " : " + alert.content + " was expired at " + alert.date + "\n";
+    })
+    alert(message);
   }
 
   function modifyTodo(_id) {

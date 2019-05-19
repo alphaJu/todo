@@ -23,16 +23,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-function formatDate(date) {
-  var d = new Date(date),
-  month = "" + (d.getMonth() + 1),
-  day = "" + d.getDate(),
-  year = d.getFullYear();
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-  return [year, month, day].join("-");
-}
-
 router.post('/todo', function(req, res, next) {
   var todo = new Todo({
     'title':req.body.title,
@@ -79,4 +69,15 @@ router.delete('/todo', async function(req, res, next) {
   await Todo.deleteOne({'_id':req.body.todoId});
   return res.json({'message':'delete success'});
 });
+
+function formatDate(date) {
+  var d = new Date(date),
+  month = "" + (d.getMonth() + 1),
+  day = "" + d.getDate(),
+  year = d.getFullYear();
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+  return [year, month, day].join("-");
+}
+
 module.exports = router;
