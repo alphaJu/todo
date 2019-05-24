@@ -1,3 +1,5 @@
++) aws 무료티어 이용이라 과제 통과한 후에는 닫아 놓은 상태입니다.
+   대신 todo.mov 를 확인하시면 동작 구현을 보실 수 있습니다.
 
 1. nodejs install
   (1)
@@ -35,6 +37,3 @@
   mongo
   
   https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
-
-+) aws 무료티어 이용이라 과제 통과한 후에는 닫아 놓은 상태입니다.
-   대신 todo.mov 를 확인하시면 동작 구현을 보실 수 있습니다.
